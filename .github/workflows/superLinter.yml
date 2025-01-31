@@ -1,0 +1,38 @@
+name: Basic Workflow Demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      name: 
+        description: "Person To greet"
+        default: "World"
+        required: true
+        type: text
+      city:
+        description: "Favorite City"
+        required: true
+        default: "Akwa Ibom"
+        type: choice
+        options:
+         - Lagos
+         - Abuja
+         - Ibadan
+      fav-color-blue:
+        description: "Is your favorite color blue"
+        required: true
+        type: boolean
+
+jobs:
+  greet: 
+    name: "Greetings Program"
+    runs-on: 
+      - ubuntu-latest
+
+    steps:
+      - name: Send Greeting
+        run: |
+          echo "Hello ${{github.events.inputs.name}}"
+          echo "Your Favorite City is ${{github.events.inputs.city}}"
+          echo "Is your favorite color blue: ${{github.events.inputs.fav-color-blue}}"
+
+         
